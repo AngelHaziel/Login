@@ -2,7 +2,6 @@
     import Navegador from './Navegador.svelte';
     import Login from './Login.svelte';
     //let arreglo = ['Home', 'About', 'Services', 'Contact', 'Enlace 5', 'Enlace 6'];
-
 </script>
 
 <style>

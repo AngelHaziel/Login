@@ -1,6 +1,49 @@
 <script>
- let emp = [];
+    let correo = "";
+    let contra = "";
+
+    let mostrarUsuarios = () => {
+        fetch('http://localhost/apiPHP/')
+        .then(respuesta=>respuesta.json())
+        .then((objetosJSON)=>{
+            let usuarios = [] = objetosJSON;
+
+            console.log(usuarios);
+
+        }).catch(console.log);
+    }
+    mostrarUsuarios();
+
+    let verificacionLogin = () => {
+        fetch('http://localhost/apiPHP/')
+        .then(respuesta=>respuesta.json())
+        .then((objetosJSON)=>{
+            let usuarios = [] = objetosJSON;
+            let i = 0;
+            while(i < usuarios.length){
+                if(correo == usuarios[i].correo){
+                    if(contra == usuarios[i].contra){
+                        console.log(usuarios[i].nombre + " inicio sesión");
+                        alert(usuarios[i].nombre + " inicio sesión");
+                        break;
+                    } else {
+                        console.log("Datos incorrectos");
+                        alert("Datos incorrectos");
+                        break;
+                    }
+                }
+                i++;
+            }
+            if(i == usuarios.length){
+                console.log("No se ha encontrado al usuario");
+                alert("No se ha encontrado al usuario");
+            }
+            
+        }).catch(console.log);
+    }
+
 </script>
+
 <style>
     *{
       font-family: 'Poppins', sans-serif;
@@ -201,14 +244,14 @@
                 <span class="icono">
                     <ion-icon name="mail"></ion-icon>
                 </span>
-                <input  type="mail" required>
+                <input  type="mail" bind:value={correo} required>
                 <label for="">Correo</label>
             </div>
             <div class="entrada-datos">
                 <span class="icono">
                     <ion-icon name="lock-closed"></ion-icon>
                 </span>
-                <input type="password" required>
+                <input type="password" bind:value={contra} required>
                 <label for="">Contraseña</label>
             </div>
             <div class="recordar-contra">
@@ -217,7 +260,7 @@
                 </label>
                 <a data-sveltekit-preload-data="tap" href=" " >¿Olvidaste tu Contraseña?</a>
             </div>
-            <button type="submit" class="btn">Ingresar</button>
+            <button type="submit" class="btn" on:click|preventDefault={verificacionLogin}>Ingresar</button>
             <div class="registro-login">
                 <p>¿No tienes cuenta? <a data-sveltekit-preload-data="tap" href=" " >Registrate</a></p>
             </div>
